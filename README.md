@@ -83,7 +83,7 @@ See [`Collection/README.md`](Collection/README.md) for library and asset convent
 
 - **Additional code tabs** — add more `.pde` files in the sketch folder; Processing merges them automatically.
 - **Media assets** — put images, fonts, and sounds in a `data/` subfolder inside the sketch directory.
-- **Third-party libraries** — install via **Sketch → Import Library → Add Library…** (with sketchbook set to `Collection/`). Libraries are not committed to this repo (see `.gitignore`). CircleSketch needs the **Sound** library.
+- **Third-party libraries** — install via **Sketch → Import Library → Add Library…** (with sketchbook set to `Collection/`). Libraries are not committed to this repo (see `.gitignore`). LootSeeker needs the **Sound** library.
 
 ## Exporting
 

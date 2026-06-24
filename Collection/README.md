@@ -6,8 +6,11 @@ Sketches live here — one folder per project. Each sketch folder contains a `.p
 
 | Sketch | Description |
 |--------|-------------|
-| [CircleSketch](CircleSketch/) | Timed loot-collection game (requires **Sound** library — install from the Library Manager) |
+| [LootSeeker](LootSeeker/) | Timed loot-collection game (requires **Sound** library — install from the Library Manager) |
+| [Mazey](Mazey/) | Ball bouncing on a 3D plane — click to reset |
+| [Bouncey](Bouncey/) | Multi-ball physics playground with trails, squash/stretch, and impact rings |
 | [HelloSketch](HelloSketch/) | Animated color grid — starter template |
+| [SimpleSketch](SimpleSketch/) | Blank window — minimal starter |
 
 ## Shared libraries
 

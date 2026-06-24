@@ -1,5 +1,5 @@
 /**
- * CircleSketch — collect white loot circles as the user.
+ * LootSeeker — collect white loot circles as the user.
  */
 
 import processing.sound.*;
@@ -7,7 +7,7 @@ import processing.sound.*;
 final float WORLD_WIDTH = 2000;
 final float WORLD_HEIGHT = 2000;
 final int GRID_SIZE = 100;
-final float GAME_DURATION_SEC = 15;
+final float GAME_DURATION_SEC = 30;
 
 final int STATE_TITLE = 0;
 final int STATE_PLAYING = 1;
