@@ -1,0 +1,233 @@
+class User {
+  float x;
+  float y;
+  float radius;
+  color fillColor;
+  float vx;
+  float vy;
+  float acceleration = 0.25;
+  float maxSpeed = 10;
+  float bounce = 0.98;
+  float friction = 0.98;
+  float heading;
+
+  boolean moveUp;
+  boolean moveDown;
+  boolean moveLeft;
+  boolean moveRight;
+
+  User(float x, float y, float radius) {
+    this.x = x;
+    this.y = y;
+    this.radius = radius;
+    this.fillColor = color(60, 130, 255);
+    heading = -HALF_PI;
+  }
+
+  void onKeyPressed() {
+    if (isUpKey()) {
+      moveUp = true;
+    }
+    if (isDownKey()) {
+      moveDown = true;
+    }
+    if (isLeftKey()) {
+      moveLeft = true;
+    }
+    if (isRightKey()) {
+      moveRight = true;
+    }
+  }
+
+  void onKeyReleased() {
+    if (isUpKey()) {
+      moveUp = false;
+    }
+    if (isDownKey()) {
+      moveDown = false;
+    }
+    if (isLeftKey()) {
+      moveLeft = false;
+    }
+    if (isRightKey()) {
+      moveRight = false;
+    }
+  }
+
+  void update(float worldWidth, float worldHeight) {
+    float ax = 0;
+    float ay = 0;
+
+    if (moveUp) {
+      ay -= 1;
+    }
+    if (moveDown) {
+      ay += 1;
+    }
+    if (moveLeft) {
+      ax -= 1;
+    }
+    if (moveRight) {
+      ax += 1;
+    }
+
+    if (ax != 0 || ay != 0) {
+      float magnitude = sqrt(ax * ax + ay * ay);
+      ax = (ax / magnitude) * acceleration;
+      ay = (ay / magnitude) * acceleration;
+    }
+
+    vx += ax;
+    vy += ay;
+
+    vx *= friction;
+    vy *= friction;
+
+    float speed = sqrt(vx * vx + vy * vy);
+    if (speed >= 0.35) {
+      heading = atan2(vy, vx);
+    }
+    if (speed > maxSpeed) {
+      vx = (vx / speed) * maxSpeed;
+      vy = (vy / speed) * maxSpeed;
+    }
+
+    x += vx;
+    y += vy;
+
+    if (x < radius) {
+      x = radius;
+      vx = abs(vx) * bounce;
+    } else if (x > worldWidth - radius) {
+      x = worldWidth - radius;
+      vx = -abs(vx) * bounce;
+    }
+
+    if (y < radius) {
+      y = radius;
+      vy = abs(vy) * bounce;
+    } else if (y > worldHeight - radius) {
+      y = worldHeight - radius;
+      vy = -abs(vy) * bounce;
+    }
+  }
+
+  void draw() {
+    drawBoatAt(x, y);
+  }
+
+  void drawScreen() {
+    drawBoatAt(width / 2.0, height / 2.0);
+  }
+
+  void drawBoatAt(float cx, float cy) {
+    float r = radius;
+    color hullBlue = color(72, 132, 198);
+    color deckCream = color(245, 232, 205);
+    color windowBlue = color(24, 52, 82);
+    color railSilver = color(188, 198, 210);
+    color woodAccent = color(146, 98, 52);
+
+    pushMatrix();
+    translate(cx, cy);
+    rotate(heading);
+
+    // Outer hull
+    fill(hullBlue);
+    noStroke();
+    beginShape();
+    vertex(r * 1.5, 0);
+    vertex(r * 0.55, -r * 0.72);
+    vertex(-r * 0.82, -r * 0.62);
+    vertex(-r * 1.08, -r * 0.34);
+    vertex(-r * 1.08, r * 0.34);
+    vertex(-r * 0.82, r * 0.62);
+    vertex(r * 0.55, r * 0.72);
+    endShape(CLOSE);
+
+    // Inner deck
+    fill(deckCream);
+    beginShape();
+    vertex(r * 1.18, 0);
+    vertex(r * 0.42, -r * 0.54);
+    vertex(-r * 0.72, -r * 0.46);
+    vertex(-r * 0.92, -r * 0.26);
+    vertex(-r * 0.92, r * 0.26);
+    vertex(-r * 0.72, r * 0.46);
+    vertex(r * 0.42, r * 0.54);
+    endShape(CLOSE);
+
+    // Rear cockpit floor lines
+    //stroke(220, 205, 180, 120);
+    //strokeWeight(0.8);
+    //line(-r * 0.88, -r * 0.12, -r * 0.55, -r * 0.12);
+    //line(-r * 0.88, r * 0.12, -r * 0.55, r * 0.12);
+    //line(-r * 0.72, -r * 0.22, -r * 0.72, r * 0.22);
+
+    // Cabin roof
+    //fill(deckCream);
+    //noStroke();
+    //rect(-r * 0.08, -r * 0.3, r * 0.72, r * 0.6, r * 0.12);
+
+    // Windshield (curved front glass)
+    //fill(windowBlue);
+    //beginShape();
+    //vertex(r * 0.64, -r * 0.28);
+    //quadraticVertex(r * 0.48, 0, r * 0.64, r * 0.28);
+    //quadraticVertex(r * 0.36, 0, r * 0.64, -r * 0.28);
+    //endShape(CLOSE);
+
+    // Roof window
+    //fill(windowBlue);
+    //rect(r * 0.02, -r * 0.18, r * 0.42, r * 0.36, r * 0.08);
+    //fill(255, 255, 255, 50);
+    //rect(r * 0.06, -r * 0.14, r * 0.14, r * 0.1, r * 0.03);
+
+    // Wood side accents
+    //fill(woodAccent);
+    //rect(-r * 0.58, -r * 0.42, r * 0.14, r * 0.18, 2);
+    //rect(-r * 0.58, r * 0.24, r * 0.14, r * 0.18, 2);
+
+    // Outboard motor
+    fill(18, 20, 24);
+    rect(-r * 1.22, -r * 0.14, r * 0.18, r * 0.28, 3);
+
+    // Side handrails
+    //stroke(railSilver);
+    //strokeWeight(1.4);
+    //noFill();
+    //arc(r * 0.15, -r * 0.58, r * 1.1, r * 0.5, PI + 0.15, TWO_PI - 0.15);
+    //arc(r * 0.15, r * 0.58, r * 1.1, r * 0.5, 0.15, PI - 0.15);
+
+    // Stern swim ladder
+    //stroke(railSilver);
+    //strokeWeight(1.1);
+    //line(-r * 1.02, r * 0.34, -r * 0.92, r * 0.34);
+    //line(-r * 1.02, r * 0.42, -r * 0.92, r * 0.42);
+    //line(-r * 1.02, r * 0.5, -r * 0.92, r * 0.5);
+    //line(-r * 1.02, r * 0.34, -r * 1.02, r * 0.5);
+
+    // Bow cleat
+    fill(railSilver);
+    noStroke();
+    rect(r * 1.38, -r * 0.04, r * 0.08, r * 0.08, 1);
+
+    popMatrix();
+  }
+
+  boolean isUpKey() {
+    return key == 'w' || key == 'W' || keyCode == UP;
+  }
+
+  boolean isDownKey() {
+    return key == 's' || key == 'S' || keyCode == DOWN;
+  }
+
+  boolean isLeftKey() {
+    return key == 'a' || key == 'A' || keyCode == LEFT;
+  }
+
+  boolean isRightKey() {
+    return key == 'd' || key == 'D' || keyCode == RIGHT;
+  }
+}

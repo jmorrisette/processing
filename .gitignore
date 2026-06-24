@@ -1,0 +1,23 @@
+# Processing build and export output
+application.*/
+application.*.zip
+*.class
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+
+# Local env overrides
+.env
+.env.local
+
+# Contributed Processing libraries — install via Sketch → Import Library → Add Library…
+Collection/libraries/sound/
+
+# Per-sketch library copies (use Collection/libraries/ instead)
+Collection/*/libraries/
