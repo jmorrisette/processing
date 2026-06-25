@@ -9,6 +9,8 @@ Sketches live here — one folder per project. Each sketch folder contains a `.p
 | [LootSeeker](LootSeeker/) | Timed loot-collection game (requires **Sound** library — install from the Library Manager) |
 | [Mazey](Mazey/) | Ball bouncing on a 3D plane — click to reset |
 | [Bouncey](Bouncey/) | Multi-ball physics playground with trails, squash/stretch, and impact rings |
+| [Noise](Noise/) | Static 3D terrain generated from 2D Perlin noise — press `r` to reseed |
+| [Heightmap](Heightmap/) | Turns a grayscale PNG into a 3D heightmapped plane — press `o` to choose an image |
 | [HelloSketch](HelloSketch/) | Animated color grid — starter template |
 | [SimpleSketch](SimpleSketch/) | Blank window — minimal starter |
 
